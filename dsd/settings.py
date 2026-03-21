@@ -126,3 +126,24 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# https://docs.authlib.org/en/stable/client/django.html
+AUTHLIB_OAUTH_CLIENTS = {
+    "github": {
+        # https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps
+        "client_id": os.environ.get("GITHUB_CLIENT_ID"),
+        "client_secret": os.environ.get("GITHUB_CLIENT_SECRET"),
+        "access_token_url": "https://github.com/login/oauth/access_token",
+        "access_token_params": None,
+        "refresh_token_url": None,
+        "authorize_url": "https://github.com/login/oauth/authorize",
+        "authorize_params": {
+            "prompt": "select_account",
+        },
+        "api_base_url": "https://api.github.com/",
+        "client_kwargs": {
+            "scope": "user:email",
+        },
+    }
+}
